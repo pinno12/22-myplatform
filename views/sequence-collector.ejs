@@ -1,0 +1,247 @@
+<%- include('partials/_header'); -%>
+
+    <div class="container col-8 mt-4">
+      <h1 class="ui header ">Sequence Collector
+      </h1>
+      <section class="ui stacked segment" id="search step">
+        <div class="row">
+          <div class="ui form">
+            <div class="field">
+              <label>Task name</label>
+              <input type="text" maxlength="50" placeholder="Task Name under 50 characters">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row my-2">
+          
+          <div class="col-4">
+            <label>Database Source</label> 
+            <select class="ui fluid selection dropdown">
+              <option value="0"> Qualified seq (Recommend)</option>
+              <option value="1">All</option>
+              <option value="2"> Custom</option>
+            </select>
+      
+          </div>
+          <div class="col mt-4">
+            <div class="ui form">
+              <div class="inline fields">
+                <div class="field">
+                  <div class="ui  checkbox">
+                    <input type="checkbox" name="frequency" checked="checked">
+                    <label>Refseq</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui checkbox">
+                    <input type="checkbox" name="frequency">
+                    <label>Genome</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui checkbox">
+                    <input type="checkbox" name="frequency">
+                    <label>Partial </label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui checkbox">
+                    <input type="checkbox" name="frequency">
+                    <label>WGS only </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-3 mt-4">
+            <div class="ui slider checkbox">
+              <input type="checkbox" name="newsletter">
+              <label>Complete genome</label>
+            </div>
+
+            <i class="question circle icon myPopup" data-content="Complete genome only ( Complete / chromosome)"
+              data-position="right center"></i>
+
+          </div>
+        </div>
+        <h3 class="ui dividing header"> Features
+        </h3>
+        <div class = "row">
+          
+          
+        <div class="ui form">
+          <div class="three fields">
+            <div class="field">
+              <label>Feature key</label> 
+              <select class="ui search  dropdown" id="search-select">
+                <option value='CDS'>	CDS	</option>
+                <option value='3’UTR '>	3’UTR 	</option>
+                <option value='5’UTR '>	5’UTR 	</option>
+                <option value='gene '>	gene 	</option>
+                <option value='mat_peptide '>	mat_peptide 	</option>
+                <option value='rRNA '>	rRNA 	</option>
+                <option value='exon'>	exon	</option>
+                <option value='intron'>	intron	</option>
+                <option value='misc_binding'>	misc_binding	</option>
+                <option value='misc_feature'>	misc_feature	</option>
+                <option value='mobile_element'>	mobile_element	</option>
+                <option value='mRNA'>	mRNA	</option>
+                <option value='ncRNA'>	ncRNA	</option>
+                <option value='operon'>	operon	</option>
+                <option value='precursor_RNA'>	precursor_RNA	</option>
+                <option value='prim_transcript'>	prim_transcript	</option>
+                <option value='primer_bind'>	primer_bind	</option>
+                <option value='propeptide'>	propeptide	</option>
+                <option value='sig_peptide'>	sig_peptide	</option>
+                <option value='STS'>	STS	</option>
+                <option value='tmRNA'>	tmRNA	</option>
+                <option value='tRNA'>	tRNA	</option>
+                
+
+              </select>
+            </div>
+            <div class="field">
+              <label>Gene name (abbreviation)</label>
+              <div class="ui icon input">
+                <input type="text" placeholder="Maximum: 50 characters.">
+                <i class="search icon"></i>
+              </div>
+            </div>
+            <div class="field">
+           <label class = "text-white">Search</label>
+              <button class="ui button active mt-0">Search</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+        <h3 class="ui dividing header">Search results(synonyms)
+        </h3>
+ 
+        <select name="skills" multiple="" class="ui fluid dropdown">
+          <option value="">Skilllllllls</option>
+        <option value="angular">Angular</option>
+        <option value="css">CSS</option>
+        <option value="design">Graphic Design</option>
+        <option value="ember">Ember</option>
+        <option value="html">HTML</option>
+        <option value="ia">Information Architecture</option>
+        <option value="javascript">Javascript</option>
+        <option value="mech">Mechanical Engineering</option>
+        <option value="meteor">Meteor</option>
+        <option value="node">NodeJS</option>
+        <option value="plumbing">Plumbing</option>
+        <option value="python">Python</option>
+        <option value="rails">Rails</option>
+        <option value="react">React</option>
+        <option value="repair">Kitchen Repair</option>
+        <option value="ruby">Ruby</option>
+        <option value="ui">UI Design</option>
+        <option value="ux">User Experience</option>
+        </select>
+
+
+
+        <div class="ui input">
+          <input type="text" placeholder="Add personally">
+        </div>
+
+        <button class="ui basic button" style="border: 2px solid var(--main-color);">Add</button>
+        <button class="ui button" style="border: 2px solid var(--sub-color);">Undo</button>
+        <button class="ui button" style="border: 2px solid var(--text-color);">Clear All</button>
+
+        <hr>
+        <div class  ="d-flex justify-content-center">
+        <button class="ui button">Go to ‘Filtering’ step
+        </button>
+      </div>
+      </section>
+
+      <section class="ui segment" id="result">
+      <h3 class="ui dividing header">
+        Result
+        (Selecting & filtering seq.)
+      </h3>
+
+      <div class = "row">
+        <div class ="col-12">
+          <div class="ui card mt-3 w-100">
+            <div class="content">
+              <div class="header">Final accession count
+              </div>
+              <h1>1,229</h1>              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class ="col">
+          <div class="card p-3 mt-3">
+            <div class="content">
+              <h1>1,229
+              </h1>
+              <h5>by selected features
+              </h5>              
+            </div>
+          </div>
+        </div>
+
+        <div class ="col">
+          <div class="card p-3 mt-3">
+            <div class="content">
+              <h1>-
+              </h1>
+              <h5>by selected taxa
+              </h5>              
+            </div>
+          </div>
+        </div>
+
+        <div class ="col">
+          <div class="card p-3 mt-3">
+            <div class="content">
+              <h1>-
+              </h1>
+              <h5>by selected hosts
+              </h5>              
+            </div>
+          </div>
+        </div>
+
+        <div class ="col">
+          <div class="card p-3 mt-3">
+            <div class="content">
+              <h1>-
+              </h1>
+              <h5>by selected hosts
+              </h5>              
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <hr />
+      <div class  ="d-flex justify-content-center">
+        <button class="ui button">Save / Summit
+
+        </button>
+      </div>
+
+      </section>
+
+
+
+   
+
+      <%- include('partials/_footer'); -%>
+
+ 

@@ -1,8 +1,7 @@
 const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
-
-// Création du serveur Express
+const nunjucks = require('nunjucks');
 
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
@@ -51,27 +50,6 @@ app.get("/level", require('connect-ensure-login').ensureLoggedIn(), (req, res) =
   res.render("level", { model: {} });
 });
 
-// POST /create
-app.post("/level", (req, res) => {
-  const sql = "INSERT INTO level (name, phone, eduson_id, TestType, Level, Date, score, scoreL, scoreR) VALUES (?,?,?,?,?,?,?,?,?)";
-  const book = [req.body.name, req.body.phone,req.body.eduson_id, req.body.TestType, req.body.Level, req.body.Date, req.body.score, req.body.scoreL, req.body.scoreR ];
-  db.run(sql, book, err => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.redirect("/level");
-  });
-});
-
-app.get("/result", require('connect-ensure-login').ensureLoggedIn(), (req, res) => {
-  const sql = "SELECT * FROM level ORDER BY id DESC";
-  db.all(sql, [], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.render("result", { model: rows });
-  });
-});
 
 app.get('/login',
   function(req, res){
@@ -84,7 +62,7 @@ app.get('/login',
   function(req, res) {
     if (req.user.username == '1'){
       console.log(req.user.username)
-      res.redirect('result');
+      res.redirect('/');
 
       
     }else{
@@ -99,13 +77,25 @@ app.get('/logout',
     res.redirect('/');
   });
 
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
 
+  // app.get("/",require('connect-ensure-login').ensureLoggedIn(), function (req, res) {
+  //   res.render('index',{ user: req.user });
+  //  });
+  
 
+   app.get("/", function (req, res) {
+    res.render('index',{ user: req.user, title : 'About - WISDOM' });
+   });
+  
+   app.get("/about", function (req, res) {
+    res.render('index',{ user: req.user, title : 'About - WISDOM' });
+   });
+
+   app.get("/sequence-collector", function (req, res) {
+    res.render('sequence-collector',{ user: req.user, title: 'Sequence collector - WISDOM' });
+   });
+
+  
 
 // Server
 app.set("view engine", "ejs");
@@ -113,30 +103,18 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
-// Connection to SQLite
-const db_name = path.join(__dirname, "data", "apptest.db");
-const db = new sqlite3.Database(db_name, err => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log("연결합니다 'apptest.db'");
-});
+
+// app.engine('html', nunjucks.render);
+// app.set('view engine', 'html');
+// nunjucks.configure('views', {
+//   autoescape: true,
+//   express: app
+// });
 
 
 
 app.listen(8080, () => {
     console.log("다음 주소에 연결되었어요( http://localhost:8080/ ) !");
 });
-app.get("/", function (req, res) {
-  res.render('index');
- });
 
-app.get('/company', (req,res) => {
-  res.render('company');
-})
-
-
-// app.get("/", function (req, res) {
-//   res.redirect("login");
-//  });
 

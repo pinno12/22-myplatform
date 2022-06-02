@@ -1,3 +1,6 @@
+
+  AOS.init();
+
 // Formantic UI
 $('.ui.accordion')
   .accordion()
