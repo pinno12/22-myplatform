@@ -33,7 +33,18 @@ passport.deserializeUser(function(id, cb) {
 });
 
 
-const app = express();
+const app = express()
+
+app.engine('html', nunjucks.render);
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app
+});
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: false }));
+
 
 
 app.use(require('morgan')('combined'));
@@ -97,19 +108,12 @@ app.get('/logout',
 
   
 
-// Server
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
+// ejs template engine
+// app.set("view engine", "ejs");
+// app.set("views", path.join(__dirname, "views"));
 
+// nunjucks like jinja
 
-// app.engine('html', nunjucks.render);
-// app.set('view engine', 'html');
-// nunjucks.configure('views', {
-//   autoescape: true,
-//   express: app
-// });
 
 
 
