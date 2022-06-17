@@ -2,11 +2,10 @@ const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const nunjucks = require('nunjucks');
-
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db2 = require('./models');
-
+const app = express()
 
 
 passport.use(new Strategy(
@@ -18,8 +17,6 @@ passport.use(new Strategy(
       return cb(null, user);
     });
   }));
-
-
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
@@ -33,7 +30,7 @@ passport.deserializeUser(function(id, cb) {
 });
 
 
-const app = express()
+
 
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
@@ -44,7 +41,6 @@ nunjucks.configure('views', {
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
-
 
 
 app.use(require('morgan')('combined'));
@@ -73,9 +69,7 @@ app.get('/login',
   function(req, res) {
     if (req.user.username == '1'){
       console.log(req.user.username)
-      res.redirect('/');
-
-      
+      res.redirect('/');      
     }else{
       res.redirect('level');
     }
@@ -88,7 +82,7 @@ app.get('/logout',
     res.redirect('/');
   });
 
-
+// 로그인해야 조회 가능
   // app.get("/",require('connect-ensure-login').ensureLoggedIn(), function (req, res) {
   //   res.render('index',{ user: req.user });
   //  });
@@ -105,16 +99,6 @@ app.get('/logout',
    app.get("/sequence-collector", function (req, res) {
     res.render('sequence-collector',{ user: req.user, title: 'Sequence collector - WISDOM' });
    });
-
-  
-
-// ejs template engine
-// app.set("view engine", "ejs");
-// app.set("views", path.join(__dirname, "views"));
-
-// nunjucks like jinja
-
-
 
 
 app.listen(8080, () => {
